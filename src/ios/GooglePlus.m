@@ -204,6 +204,8 @@ static void swizzleMethod(Class class, SEL destinationSelector, SEL sourceSelect
 - (void)signIn:(GIDSignIn *)signIn
 didSignInForUser:(GIDGoogleUser *)user
      withError:(NSError *)error {
+    // PV mods - it seemed like GP was missing setting isSigningIn to false here...
+    self.isSigningIn = NO;
     if (error) {
         CDVPluginResult * pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:_callbackId];
